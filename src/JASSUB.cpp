@@ -79,7 +79,7 @@ const float MAX_UINT8_CAST = 255.9 / 255;
 typedef struct RenderResult {
 public:
   int x, y, w, h;
-  size_t image;
+  uintptr_t image;
   RenderResult *next;
 } RenderResult;
 
@@ -400,7 +400,7 @@ public:
       result->h = h;
       result->x = img->dst_x;
       result->y = img->dst_y;
-      result->image = (size_t)data;
+      result->image = (uintptr_t)data;
       result->next = NULL;
 
       if (tmp) {
@@ -678,7 +678,7 @@ public:
     storage->next.y = rect.min_y;
     storage->next.w = width;
     storage->next.h = height;
-    storage->next.image = (size_t)result;
+    storage->next.image = (uintptr_t)result;
 
     return &storage->next;
   }
