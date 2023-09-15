@@ -79,7 +79,7 @@ const float MAX_UINT8_CAST = 255.9 / 255;
 typedef struct RenderResult {
 public:
   int x, y, w, h;
-  size_t image;
+  uint32_t *image;
   RenderResult *next;
 } RenderResult;
 
@@ -400,7 +400,7 @@ public:
       result->h = h;
       result->x = img->dst_x;
       result->y = img->dst_y;
-      result->image = (size_t)data;
+      result->image = data;
       result->next = NULL;
 
       if (tmp) {
@@ -678,7 +678,7 @@ public:
     storage->next.y = rect.min_y;
     storage->next.w = width;
     storage->next.h = height;
-    storage->next.image = (size_t)result;
+    storage->next.image = result;
 
     return &storage->next;
   }
@@ -766,7 +766,7 @@ EMSCRIPTEN_BINDINGS(JASSUB) {
     .property("w", &RenderResult::w)
     .property("h", &RenderResult::h)
     .property("next", &getNext)
-    .property("image", &RenderResult::image);
+    .property("image", &RenderResult::image, emscripten::allow_raw_pointers());
 
   emscripten::class_<ASS_Style>("ASS_Style")
     .property("Name", &getStyleName, &setStyleName)    
