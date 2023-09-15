@@ -393,7 +393,7 @@ public:
       if (alpha == 0.0) continue;
 
       unsigned int datasize = sizeof(uint32_t) * w * h;
-      size_t *data = (size_t *)rawbuffer;
+      uint32_t *data = (uint32_t *)rawbuffer;
       decodeBitmap(alpha, data, img, w, h);
       RenderResult *result = (RenderResult *)(rawbuffer + datasize);
       result->w = w;
@@ -416,7 +416,7 @@ public:
     return renderResult;
   }
 
-  void decodeBitmap(double alpha, size_t *data, ASS_Image *img, int w, int h) {
+  void decodeBitmap(double alpha, uint32_t *data, ASS_Image *img, int w, int h) {
     uint32_t color = ((img->color << 8) & 0xff0000) | ((img->color >> 8) & 0xff00) | ((img->color >> 24) & 0xff);
     uint8_t *pos = img->bitmap;
     uint32_t res = 0;
