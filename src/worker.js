@@ -1,3 +1,5 @@
+import 'whatwg-fetch'
+
 import WASM from 'wasm'
 
 const read_ = (url, ab) => {
