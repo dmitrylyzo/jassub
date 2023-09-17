@@ -32,8 +32,7 @@ if (typeof console === 'undefined') {
       content: JSON.stringify(Array.prototype.slice.call(a))
     })
   }
-  // eslint-disable-next-line no-global-assign
-  console = {
+  self.console = {
     log: function () {
       msg('log', arguments)
     },
