@@ -445,7 +445,7 @@ self.init = data => {
     eval(read_(data.legacyWasmUrl))
   }
   // hack, we want custom WASM URLs
-  const _fetch = fetch
+  const _fetch = self.fetch
   const wasm = !self.WebAssembly?.instantiateStreaming && read_(data.wasmUrl, true)
   if (self.WebAssembly?.instantiateStreaming) self.fetch = _ => _fetch(data.wasmUrl)
   WASM({ wasm }).then(Module => {
